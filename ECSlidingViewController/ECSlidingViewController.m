@@ -818,6 +818,8 @@
 - (void)completeTransition:(BOOL)didComplete {
     if (self.currentOperation == ECSlidingViewControllerOperationNone) return;
     
+    [self willChangeValueForKey:@"currentTopViewPosition"];
+    
     if ([self transitionWasCancelled]) {
         if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
             _currentTopViewPosition = ECSlidingViewControllerTopViewPositionCentered;
@@ -839,6 +841,8 @@
             _currentTopViewPosition = ECSlidingViewControllerTopViewPositionCentered;
         }
     }
+    
+    [self didChangeValueForKey:@"currentTopViewPosition"];
     
     if ([self.currentAnimationController respondsToSelector:@selector(animationEnded:)]) {
         [self.currentAnimationController animationEnded:didComplete];
